@@ -6,9 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".ui.login.DashboardActivity">
 
-<TextView
-    android:layout_width="match_parent"
-    android:id="@+id/tv_detail"
-    android:scrollbars="vertical"
-    android:layout_height="match_parent"/>
+
+    <ImageView
+        android:id="@+id/iv_login_logo"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/img"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ImageView>
+
+    <TextView
+        android:id="@+id/tv_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:scrollbars="vertical"
+        android:text="@string/top_stories"
+        android:textColor="#9C27B0"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iv_login_logo" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/top_feed_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="110dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_detail" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

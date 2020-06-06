@@ -27,18 +27,26 @@ import android.os.Build
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import com.jaeger.library.StatusBarUtil
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
+
 
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var loginViewModel: LoginViewModel
+    private var mEmailValidator: EmailValidator? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-       /* setnavi()
-        StatusBarUtil.setTranslucent(this)
-       */
+        supportActionBar?.hide()
+       window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        //LoginActivityTest(this)
+
         val username = findViewById<EditText>(R.id.username)
         val password = findViewById<EditText>(R.id.password)
         val login = findViewById<Button>(R.id.login)
@@ -49,8 +57,12 @@ class LoginActivity : AppCompatActivity() {
 
         loginViewModel.loginFormState.observe(this@LoginActivity, Observer {
             val loginState = it ?: return@Observer
+            mEmailValidator= EmailValidator()
+
+            username.addTextChangedListener(mEmailValidator)
 
             // disable login button unless both username / password is valid
+
             login.isEnabled = loginState.isDataValid
 
             if (loginState.usernameError != null) {
@@ -75,11 +87,9 @@ class LoginActivity : AppCompatActivity() {
 
             //Complete and destroy login activity once successful
             finish()
-        startActivity(Intent(this,DashboardActivity::class.java))
+            startActivity(Intent(this,DashboardActivity::class.java))
 
-
-
-        })
+             })
 
         username.afterTextChanged {
             loginViewModel.loginDataChanged(

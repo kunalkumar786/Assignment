@@ -42,7 +42,7 @@ public class NetworkClient {
 
     private static void initializeRetrofitLib() {
 
-        String apiBaseURL = "https://hacker-news.firebaseio.com/v0/item/";
+        String apiBaseURL = "https://hacker-news.firebaseio.com";
 
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").create();
         OkHttpClient client = new OkHttpClient.Builder()
@@ -72,7 +72,12 @@ public class NetworkClient {
     }
 
     public interface APIClient {
-      @GET("22512196.json")
-        Call<ResponseBody> sendRequest(/*@Query("param") String jsonParam*/);
+        @GET("/v0/topstories.json")
+        Call<ResponseBody>TopStories();
+
+
+        @GET()
+        Call<ResponseBody> sendRequest(@Url String url);
+
     }
 }
